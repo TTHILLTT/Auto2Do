@@ -27,6 +27,12 @@ internal sealed class MainForm : Form
         AutoSize = true,
         Text = "登录 Windows 时自动启动"
     };
+    private readonly CheckBox _amoledTheme = new()
+    {
+        AutoSize = true,
+        Text = "深色模式 (AMOLED)"
+    };
+    private bool _isAmoled;
     private bool _allowClose;
 
     public MainForm(bool startMinimized)
@@ -38,6 +44,7 @@ internal sealed class MainForm : Form
         Font = new Font("Microsoft YaHei UI", 9F);
         ShowInTaskbar = true;
 
+        _isAmoled = IsAmoledThemeEnabled();
         _tasks = _store.Load();
         _persistedTasks.AddRange(_tasks.Select(task => task.Copy()));
         BuildInterface();
@@ -70,6 +77,13 @@ internal sealed class MainForm : Form
 
     private void BuildInterface()
     {
+        var helpMenu = new ToolStripMenuItem("帮助");
+        helpMenu.DropDownItems.Add("关于 Auto2Do", null, (_, _) => ShowAbout());
+        var menu = new MenuStrip();
+        menu.Items.Add(helpMenu);
+        MainMenuStrip = menu;
+        Controls.Add(menu);
+
         var root = new TableLayoutPanel
         {
             Dock = DockStyle.Fill,
@@ -79,7 +93,7 @@ internal sealed class MainForm : Form
         };
         root.RowStyles.Add(new RowStyle(SizeType.Absolute, 72));
         root.RowStyles.Add(new RowStyle(SizeType.Percent, 100));
-        root.RowStyles.Add(new RowStyle(SizeType.Absolute, 84));
+        root.RowStyles.Add(new RowStyle(SizeType.Absolute, 120));
         root.RowStyles.Add(new RowStyle(SizeType.Absolute, 28));
         Controls.Add(root);
 
@@ -100,6 +114,7 @@ internal sealed class MainForm : Form
         heading.Controls.Add(new Label
         {
             Text = "添加一次性、每日或每周任务。窗口关闭后程序会继续在系统托盘运行。",
+            Name = "ThemeDescription",
             ForeColor = Color.DimGray,
             Dock = DockStyle.Fill
         }, 0, 1);
@@ -134,10 +149,11 @@ internal sealed class MainForm : Form
         {
             Dock = DockStyle.Fill,
             ColumnCount = 1,
-            RowCount = 2,
-            Padding = new Padding(0, 12, 0, 0)
+            RowCount = 3,
+            Padding = new Padding(0, 8, 0, 0)
         };
-        controls.RowStyles.Add(new RowStyle(SizeType.Absolute, 38));
+        controls.RowStyles.Add(new RowStyle(SizeType.Absolute, 32));
+        controls.RowStyles.Add(new RowStyle(SizeType.Absolute, 34));
         controls.RowStyles.Add(new RowStyle(SizeType.Percent, 100));
         var buttons = new FlowLayoutPanel
         {
@@ -152,10 +168,18 @@ internal sealed class MainForm : Form
         buttons.Controls.Add(CreateButton("取消待执行的关机/重启", (_, _) => CancelPendingShutdown()));
         controls.Controls.Add(buttons, 0, 0);
 
-        var preferences = new FlowLayoutPanel { Dock = DockStyle.Fill, Padding = new Padding(2, 7, 0, 0) };
+        var preferences = new FlowLayoutPanel
+        {
+            Dock = DockStyle.Fill,
+            WrapContents = false,
+            Padding = new Padding(2, 3, 0, 0)
+        };
         preferences.Controls.Add(_startAtLogin);
+        _amoledTheme.Checked = _isAmoled;
+        preferences.Controls.Add(_amoledTheme);
         _startAtLogin.Checked = IsRegisteredForStartup();
         _startAtLogin.CheckedChanged += StartupCheckboxChanged;
+        _amoledTheme.CheckedChanged += AmoledThemeCheckboxChanged;
         controls.Controls.Add(preferences, 0, 1);
         root.Controls.Add(controls, 0, 2);
 
@@ -166,10 +190,20 @@ internal sealed class MainForm : Form
         var warning = new Label
         {
             Text = "提示：关机和重启会延迟 60 秒执行，可在倒计时期间取消；锁屏立即生效。请保存工作后再设置。",
+            Name = "ThemeWarning",
             ForeColor = Color.Firebrick,
-            AutoSize = true
+            Dock = DockStyle.Fill,
+            TextAlign = ContentAlignment.MiddleLeft
         };
-        preferences.Controls.Add(warning);
+        controls.Controls.Add(warning, 0, 2);
+
+        UiTheme.Apply(this, _isAmoled);
+    }
+
+    private void ShowAbout()
+    {
+        using var dialog = new AboutForm(_isAmoled);
+        dialog.ShowDialog(this);
     }
 
     private static Button CreateButton(string text, EventHandler onClick)
@@ -204,7 +238,7 @@ internal sealed class MainForm : Form
 
     private void AddTask()
     {
-        using var dialog = new TaskEditorForm();
+        using var dialog = new TaskEditorForm(isAmoled: _isAmoled);
         if (dialog.ShowDialog(this) != DialogResult.OK || dialog.Result is not { } task)
         {
             return;
@@ -223,7 +257,7 @@ internal sealed class MainForm : Form
             return;
         }
 
-        using var dialog = new TaskEditorForm(selected);
+        using var dialog = new TaskEditorForm(selected, _isAmoled);
         if (dialog.ShowDialog(this) != DialogResult.OK || dialog.Result is not { } edited)
         {
             return;
@@ -438,6 +472,7 @@ internal sealed class MainForm : Form
                 key.SetValue(RunValueName, StartupCommand());
                 SetStatus("已设置为登录 Windows 时启动。");
             }
+
             else
             {
                 key.DeleteValue(RunValueName, throwOnMissingValue: false);
@@ -450,6 +485,33 @@ internal sealed class MainForm : Form
             _startAtLogin.Checked = !enabled;
             _startAtLogin.CheckedChanged += StartupCheckboxChanged;
             ShowError($"无法更改登录启动设置。\n\n{ex.Message}");
+        }
+    }
+
+    private bool IsAmoledThemeEnabled()
+    {
+        using var key = Registry.CurrentUser.OpenSubKey(RunKeyPath);
+        return key?.GetValue("AmoledTheme") is int value && value == 1;
+    }
+
+    private void AmoledThemeCheckboxChanged(object? sender, EventArgs e)
+    {
+        var enabled = _amoledTheme.Checked;
+        try
+        {
+            using var key = Registry.CurrentUser.OpenSubKey(RunKeyPath, writable: true)
+                ?? throw new InvalidOperationException("无法打开 Windows 用户设置注册表项。");
+            key.SetValue("AmoledTheme", enabled ? 1 : 0, RegistryValueKind.DWord);
+            _isAmoled = enabled;
+            UiTheme.Apply(this, _isAmoled);
+            SetStatus(enabled ? "已启用 AMOLED 深色模式。" : "已恢复系统浅色模式。");
+        }
+        catch (Exception ex)
+        {
+            _amoledTheme.CheckedChanged -= AmoledThemeCheckboxChanged;
+            _amoledTheme.Checked = !enabled;
+            _amoledTheme.CheckedChanged += AmoledThemeCheckboxChanged;
+            ShowError($"无法保存主题设置。\n\n{ex.Message}");
         }
     }
 

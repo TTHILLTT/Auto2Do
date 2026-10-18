@@ -20,7 +20,7 @@ internal sealed class TaskEditorForm : Form
 
     public ScheduledTask? Result { get; private set; }
 
-    public TaskEditorForm(ScheduledTask? existing = null)
+    public TaskEditorForm(ScheduledTask? existing = null, bool isAmoled = false)
     {
         Text = existing is null ? "添加定时任务" : "编辑定时任务";
         StartPosition = FormStartPosition.CenterParent;
@@ -106,6 +106,7 @@ internal sealed class TaskEditorForm : Form
         }
 
         UpdateDateVisibility();
+        UiTheme.Apply(this, isAmoled);
     }
 
     private static ComboBox CreateComboBox() => new()

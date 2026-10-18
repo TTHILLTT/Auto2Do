@@ -11,9 +11,17 @@ internal sealed class TaskStore
         Converters = { new JsonStringEnumConverter() }
     };
 
-    public string FilePath { get; } = Path.Combine(
-        Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-        "Auto2Do", "tasks.json");
+    public string FilePath { get; }
+
+    public TaskStore()
+    {
+        var configuredPath = Environment.GetEnvironmentVariable("AUTO2DO_TASKS_FILE");
+        FilePath = string.IsNullOrWhiteSpace(configuredPath)
+            ? Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+                "Auto2Do", "tasks.json")
+            : Path.GetFullPath(configuredPath);
+    }
 
     public List<ScheduledTask> Load()
     {
@@ -35,6 +43,17 @@ internal sealed class TaskStore
 
         var temporaryPath = FilePath + ".tmp";
         File.WriteAllText(temporaryPath, JsonSerializer.Serialize(tasks, JsonOptions));
+#if NETFRAMEWORK
+        if (File.Exists(FilePath))
+        {
+            File.Replace(temporaryPath, FilePath, destinationBackupFileName: null);
+        }
+        else
+        {
+            File.Move(temporaryPath, FilePath);
+        }
+#else
         File.Move(temporaryPath, FilePath, overwrite: true);
+#endif
     }
 }

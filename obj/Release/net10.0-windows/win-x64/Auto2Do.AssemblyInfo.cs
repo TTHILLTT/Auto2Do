@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Auto2Do")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c01c444dc28308ed87711568e1bfc346500c8e2b")]
 [assembly: System.Reflection.AssemblyProductAttribute("Auto2Do")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Auto2Do")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

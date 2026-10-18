@@ -15,7 +15,12 @@ internal static class Program
 
         try
         {
+#if NETFRAMEWORK
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+#else
             ApplicationConfiguration.Initialize();
+#endif
             Application.Run(new MainForm(args.Contains("--minimized", StringComparer.OrdinalIgnoreCase)));
         }
         catch (Exception ex)

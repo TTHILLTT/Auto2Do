@@ -1,0 +1,15 @@
+E:\Work\Auto2Do\obj\Auto2Do\Release\net10.0-windows\Auto2Do.GeneratedMSBuildEditorConfig.editorconfig
+E:\Work\Auto2Do\obj\Auto2Do\Release\net10.0-windows\Auto2Do.AssemblyInfoInputs.cache
+E:\Work\Auto2Do\obj\Auto2Do\Release\net10.0-windows\Auto2Do.AssemblyInfo.cs
+E:\Work\Auto2Do\obj\Auto2Do\Release\net10.0-windows\Auto2Do.csproj.CoreCompileInputs.cache
+E:\Work\Auto2Do\obj\Auto2Do\Release\net10.0-windows\Auto2Do.sourcelink.json
+E:\Work\Auto2Do\bin\Release\net10.0-windows\Auto2Do.exe
+E:\Work\Auto2Do\bin\Release\net10.0-windows\Auto2Do.deps.json
+E:\Work\Auto2Do\bin\Release\net10.0-windows\Auto2Do.runtimeconfig.json
+E:\Work\Auto2Do\bin\Release\net10.0-windows\Auto2Do.dll
+E:\Work\Auto2Do\bin\Release\net10.0-windows\Auto2Do.pdb
+E:\Work\Auto2Do\obj\Auto2Do\Release\net10.0-windows\Auto2Do.dll
+E:\Work\Auto2Do\obj\Auto2Do\Release\net10.0-windows\refint\Auto2Do.dll
+E:\Work\Auto2Do\obj\Auto2Do\Release\net10.0-windows\Auto2Do.pdb
+E:\Work\Auto2Do\obj\Auto2Do\Release\net10.0-windows\Auto2Do.genruntimeconfig.cache
+E:\Work\Auto2Do\obj\Auto2Do\Release\net10.0-windows\ref\Auto2Do.dll

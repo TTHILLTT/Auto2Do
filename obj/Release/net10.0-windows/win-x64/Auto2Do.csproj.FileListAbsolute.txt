@@ -279,3 +279,4 @@ E:\Work\Auto2Do\obj\Release\net10.0-windows\win-x64\refint\Auto2Do.dll
 E:\Work\Auto2Do\obj\Release\net10.0-windows\win-x64\Auto2Do.pdb
 E:\Work\Auto2Do\obj\Release\net10.0-windows\win-x64\Auto2Do.genruntimeconfig.cache
 E:\Work\Auto2Do\obj\Release\net10.0-windows\win-x64\ref\Auto2Do.dll
+E:\Work\Auto2Do\obj\Release\net10.0-windows\win-x64\Auto2Do.sourcelink.json

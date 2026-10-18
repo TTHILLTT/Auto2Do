@@ -8,4 +8,7 @@
     <AssemblyName>Auto2Do</AssemblyName>
     <RootNamespace>Auto2Do</RootNamespace>
   </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="CliProgram.cs" />
+  </ItemGroup>
 </Project>

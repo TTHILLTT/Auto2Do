@@ -1,0 +1,15 @@
+E:\Work\Auto2Do\bin\Release\net10.0-windows\Auto2Do.Cli.exe
+E:\Work\Auto2Do\bin\Release\net10.0-windows\Auto2Do.Cli.deps.json
+E:\Work\Auto2Do\bin\Release\net10.0-windows\Auto2Do.Cli.runtimeconfig.json
+E:\Work\Auto2Do\bin\Release\net10.0-windows\Auto2Do.Cli.dll
+E:\Work\Auto2Do\bin\Release\net10.0-windows\Auto2Do.Cli.pdb
+E:\Work\Auto2Do\obj\Auto2Do.Cli\Release\net10.0-windows\Auto2Do.Cli.GeneratedMSBuildEditorConfig.editorconfig
+E:\Work\Auto2Do\obj\Auto2Do.Cli\Release\net10.0-windows\Auto2Do.Cli.AssemblyInfoInputs.cache
+E:\Work\Auto2Do\obj\Auto2Do.Cli\Release\net10.0-windows\Auto2Do.Cli.AssemblyInfo.cs
+E:\Work\Auto2Do\obj\Auto2Do.Cli\Release\net10.0-windows\Auto2Do.Cli.csproj.CoreCompileInputs.cache
+E:\Work\Auto2Do\obj\Auto2Do.Cli\Release\net10.0-windows\Auto2Do.Cli.sourcelink.json
+E:\Work\Auto2Do\obj\Auto2Do.Cli\Release\net10.0-windows\Auto2Do.Cli.dll
+E:\Work\Auto2Do\obj\Auto2Do.Cli\Release\net10.0-windows\refint\Auto2Do.Cli.dll
+E:\Work\Auto2Do\obj\Auto2Do.Cli\Release\net10.0-windows\Auto2Do.Cli.pdb
+E:\Work\Auto2Do\obj\Auto2Do.Cli\Release\net10.0-windows\Auto2Do.Cli.genruntimeconfig.cache
+E:\Work\Auto2Do\obj\Auto2Do.Cli\Release\net10.0-windows\ref\Auto2Do.Cli.dll

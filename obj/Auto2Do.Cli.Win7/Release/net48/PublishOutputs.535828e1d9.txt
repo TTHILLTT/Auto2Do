@@ -1,0 +1,12 @@
+E:\Work\Auto2Do\dist\win7-cli-x64\Auto2Do.Cli.exe
+E:\Work\Auto2Do\dist\win7-cli-x64\Auto2Do.Cli.exe.config
+E:\Work\Auto2Do\dist\win7-cli-x64\Auto2Do.Cli.pdb
+E:\Work\Auto2Do\dist\win7-cli-x64\Microsoft.Bcl.AsyncInterfaces.dll
+E:\Work\Auto2Do\dist\win7-cli-x64\System.Buffers.dll
+E:\Work\Auto2Do\dist\win7-cli-x64\System.Memory.dll
+E:\Work\Auto2Do\dist\win7-cli-x64\System.Numerics.Vectors.dll
+E:\Work\Auto2Do\dist\win7-cli-x64\System.Runtime.CompilerServices.Unsafe.dll
+E:\Work\Auto2Do\dist\win7-cli-x64\System.Text.Encodings.Web.dll
+E:\Work\Auto2Do\dist\win7-cli-x64\System.Text.Json.dll
+E:\Work\Auto2Do\dist\win7-cli-x64\System.Threading.Tasks.Extensions.dll
+E:\Work\Auto2Do\dist\win7-cli-x64\System.ValueTuple.dll
