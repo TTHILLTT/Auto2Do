@@ -32,3 +32,7 @@ Both command-line editions share the same task file as the desktop app:
 The app's saved tasks are stored in `%LOCALAPPDATA%\Auto2Do\tasks.json`. Enable **登录 Windows 时自动启动** to have the app run in the system tray after you sign in. Use **深色模式 (AMOLED)** to switch to a black-background theme; this preference is saved for your Windows account. The app must be running for schedules to fire. If Windows is asleep or the app is closed during the scheduled minute, the task is skipped rather than run late.
 
 One-time, daily, and weekly schedules are supported. Shutdown and restart are initiated with a 60-second delay, which can be canceled using the in-app button or `shutdown /a`. Locking the workstation is immediate.
+
+## License
+
+Auto2Do is licensed under the [MIT License](LICENSE).
